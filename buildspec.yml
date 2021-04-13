@@ -3,9 +3,9 @@ version: 0.2
 phases:
   build:
     commands:
-      -mvn clean package
+      - mvn clean package
     post_builds:
-      -echo Build completed successfully
+      - echo Build completed successfully
 artifacts:
   files:
     - target/order-service.jar
