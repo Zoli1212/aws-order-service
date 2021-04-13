@@ -10,6 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1")
 public class BookController {
@@ -34,10 +38,11 @@ public class BookController {
 
     }
 
-    @GetMapping
+    @GetMapping("/book")
     public ResponseEntity<?> getAllBooks(){
 
-        return ResponseEntity.ok(bookRepository.findAll());
+        return ResponseEntity.ok(bookRepository.findAll().stream()
+                .sorted(Comparator.comparing(Book::getPrice)).collect(Collectors.toList()));
     }
 
     @SneakyThrows
